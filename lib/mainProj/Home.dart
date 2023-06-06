@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:main2/Book_Audio.dart/theme.dart';
 import 'package:main2/mainProj/shop.dart';
 import 'package:main2/maked_Widget/makedWidget.dart';
 
@@ -15,19 +16,18 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: lightDarkTheme.getTheme(),
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.blue,
             centerTitle: true,
             title: const Text(
               "Book Sight",
               style: TextStyle(fontSize: 30, color: Colors.white),
             ),
           ),
-          backgroundColor: Colors.blue[100],
           drawer: const myDrawer(),
           body: HomeBody(),
         ),
@@ -52,9 +52,10 @@ class HomeBody extends StatelessWidget {
               width: width,
               height: height,
               child: MaterialApp(
+                theme: lightDarkTheme.getTheme(),
                 debugShowCheckedModeBanner: false,
                 home: Scaffold(
-                  backgroundColor: Colors.blue[100],
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   appBar: AppBar(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(

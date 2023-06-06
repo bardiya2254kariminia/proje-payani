@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:main2/Book_Audio.dart/theme.dart';
 import 'package:main2/mainProj/editProfInfo.dart';
 import 'package:main2/mainProj/main.dart';
 import 'package:main2/mainProj/payPal.dart';
@@ -19,21 +20,16 @@ class _profileState extends State<profile> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        hintColor: const Color.fromARGB(255, 2, 30, 53),
-      ),
+      theme: lightDarkTheme.getTheme(),
       home: Scaffold(
-        backgroundColor: Colors.blue[100],
         appBar: AppBar(
-          backgroundColor: Colors.blue,
           centerTitle: true,
           title: const Text(
             "Profile",
             style: TextStyle(fontSize: 30, color: Colors.white),
           ),
           actions: [
-            ElevatedButton(
+            IconButton(
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -41,7 +37,7 @@ class _profileState extends State<profile> {
                   ),
                 );
               },
-              child: const Icon(Icons.logout_sharp),
+              icon: const Icon(Icons.logout_sharp),
             )
           ],
         ),
@@ -78,7 +74,9 @@ class _myProfileBodyState extends State<myProfileBody> {
               width: width,
               // height: 1000,
               decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 59, 133, 193),
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? const Color.fromARGB(255, 59, 133, 193)
+                      : Colors.black,
                   borderRadius: BorderRadius.circular(10)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +155,9 @@ class _myProfileBodyState extends State<myProfileBody> {
               width: width,
               // height: 1000,
               decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 59, 133, 193),
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? const Color.fromARGB(255, 59, 133, 193)
+                      : Colors.black,
                   borderRadius: BorderRadius.circular(10)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,7 +216,9 @@ class _myProfileBodyState extends State<myProfileBody> {
               width: width,
               // height: 1000,
               decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 59, 133, 193),
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? const Color.fromARGB(255, 59, 133, 193)
+                      : Colors.black,
                   borderRadius: BorderRadius.circular(10)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -248,7 +250,21 @@ class _myProfileBodyState extends State<myProfileBody> {
                         Icons.brightness_6_outlined,
                       ),
                       title: const Text("Brightness"),
-                      onTap: () {},
+                      onTap: () {
+                        setState(() {
+                          if (lightDarkTheme.brightness == Brightness.dark) {
+                            lightDarkTheme.brightness = Brightness.light;
+                          } else {
+                            lightDarkTheme.brightness = Brightness.dark;
+                          }
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const profile(),
+                            ),
+                          );
+                        });
+                      },
                     ),
                   ),
                 ],
@@ -269,64 +285,73 @@ class popUpMoney extends StatefulWidget {
 }
 
 class _popUpMoneyState extends State<popUpMoney> {
-  var price;
   final checker = GlobalKey<FormState>();
+  var price;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return AlertDialog(
       title: const Text("How much Do you want to charge your account?"),
-      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
+      backgroundColor: Theme.of(context).brightness == Brightness.light
+          ? const Color.fromARGB(255, 174, 173, 173)
+          : Color.fromARGB(255, 35, 35, 35),
       content: SizedBox(
-        height: height / 6,
-        child: Center(
-          child: Column(
-            children: [
-              TextFormField(
-                cursorHeight: 23,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                  hintText: "Money",
-                  labelStyle: TextStyle(color: Colors.black),
-                  iconColor: Colors.black,
-                  fillColor: Colors.black,
-                ),
-                onSaved: (String? newValue) {
-                  setState(() {
-                    price = newValue;
-                  });
-                },
-                validator: (value) {
-                  if (value == null) {
-                    return "Must Fill";
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              SizedBox(
-                height: height / 20,
-                width: width,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (!checker.currentState!.validate()) {
-                    } else {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => PayPal(
-                            fee: price,
-                          ),
-                        ),
-                      );
-                    }
+        height: height / 5,
+        child: Form(
+          key: checker,
+          child: Center(
+            child: Column(
+              children: [
+                TextFormField(
+                  cursorHeight: 23,
+                  style: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
+                  ),
+                  decoration: const InputDecoration(
+                    hintText: "Money",
+                    labelStyle: TextStyle(color: Colors.black),
+                    iconColor: Colors.black,
+                    fillColor: Colors.black,
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      price = newValue;
+                    });
                   },
-                  child: const Text("PayPal"),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Must Fill";
+                    }
+                    return null;
+                  },
                 ),
-              )
-            ],
+                const SizedBox(
+                  height: 30,
+                ),
+                SizedBox(
+                  height: height / 20,
+                  width: width,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (!checker.currentState!.validate()) {
+                      } else {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => PayPal(
+                              fee: price,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text("PayPal"),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

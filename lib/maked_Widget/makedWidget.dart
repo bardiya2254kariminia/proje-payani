@@ -54,7 +54,9 @@ class _CategoryListState extends State<CategoryList> {
       width: double.maxFinite,
       height: 50,
       decoration: BoxDecoration(
-          color: Colors.blue[300], borderRadius: BorderRadius.circular(10)),
+        color: Theme.of(context).primaryColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -66,7 +68,7 @@ class _CategoryListState extends State<CategoryList> {
             width: width * 4 / 5.3,
             child: Text(
               widget.name,
-              style: TextStyle(fontSize: 30, color: Colors.white),
+              style: const TextStyle(fontSize: 30, color: Colors.white),
             ),
           ),
           Container(
@@ -121,11 +123,13 @@ class myDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          const DrawerHeader(
+          DrawerHeader(
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 28, 85, 131),
+              color: Theme.of(context).brightness == Brightness.light
+                  ? const Color.fromARGB(255, 28, 85, 131)
+                  : const Color.fromARGB(255, 36, 36, 36),
             ),
-            child: CircleAvatar(
+            child: const CircleAvatar(
               backgroundImage: AssetImage(
                 "asset/ganesha-reading-book-wallpaper-1.jpg",
               ),

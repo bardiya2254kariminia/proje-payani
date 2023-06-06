@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:main2/Book_Audio.dart/theme.dart';
 import 'package:main2/mainProj/infoPage.dart';
 import 'package:main2/maked_Widget/makedWidget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -19,12 +20,11 @@ class _ShopState extends State<Shop> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightDarkTheme.getTheme(),
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          backgroundColor: Colors.blue[100],
           appBar: AppBar(
-            backgroundColor: Colors.blue,
             centerTitle: true,
             title: const Text(
               "Shop",
@@ -72,20 +72,16 @@ class _EbookState extends State<Ebook> {
               width: double.infinity,
               child: Scaffold(
                 appBar: EasySearchBar(
-                  backgroundColor: Color.fromARGB(255, 16, 82, 137),
+                  // backgroundColor: Color.fromARGB(255, 16, 82, 137),
                   iconTheme: const IconThemeData(
                     color: Colors.white,
                   ),
-                  searchClearIconTheme: const IconThemeData(
-                    color: Color.fromARGB(255, 16, 82, 137),
+                  searchClearIconTheme: Theme.of(context).iconTheme,
+                  searchTextStyle: TextStyle(
+                    color: Theme.of(context).iconTheme.color,
                   ),
-                  searchTextStyle: const TextStyle(
-                    color: Color.fromARGB(255, 16, 82, 137),
-                  ),
-                  searchCursorColor: const Color.fromARGB(255, 16, 82, 137),
-                  searchBackIconTheme: const IconThemeData(
-                    color: Color.fromARGB(255, 16, 82, 137),
-                  ),
+                  searchCursorColor: Theme.of(context).iconTheme.color,
+                  searchBackIconTheme: Theme.of(context).iconTheme,
                   title: const Text(
                     "Search",
                     style: TextStyle(color: Colors.white),
@@ -150,20 +146,15 @@ class _AudioBookState extends State<AudioBook> {
               width: double.infinity,
               child: Scaffold(
                 appBar: EasySearchBar(
-                  backgroundColor: Color.fromARGB(255, 16, 82, 137),
                   iconTheme: const IconThemeData(
                     color: Colors.white,
                   ),
-                  searchClearIconTheme: const IconThemeData(
-                    color: Color.fromARGB(255, 16, 82, 137),
+                  searchClearIconTheme: Theme.of(context).iconTheme,
+                  searchTextStyle: TextStyle(
+                    color: Theme.of(context).iconTheme.color,
                   ),
-                  searchTextStyle: const TextStyle(
-                    color: Color.fromARGB(255, 16, 82, 137),
-                  ),
-                  searchCursorColor: const Color.fromARGB(255, 16, 82, 137),
-                  searchBackIconTheme: const IconThemeData(
-                    color: Color.fromARGB(255, 16, 82, 137),
-                  ),
+                  searchCursorColor: Theme.of(context).iconTheme.color,
+                  searchBackIconTheme: Theme.of(context).iconTheme,
                   title: const Text(
                     "Search",
                     style: TextStyle(color: Colors.white),

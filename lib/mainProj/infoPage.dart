@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:main2/Book_Audio.dart/theme.dart';
 import 'package:main2/mainProj/payPal.dart';
 import 'package:main2/maked_Widget/makedWidget.dart';
 
@@ -25,10 +26,9 @@ class _infoPageState extends State<infoPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightDarkTheme.getTheme(),
       home: Scaffold(
-        backgroundColor: Colors.blue[50],
         appBar: AppBar(
-          backgroundColor: Colors.blue,
           centerTitle: true,
           title: const Text(
             "Book Sight",
@@ -61,6 +61,9 @@ class myInfo extends StatefulWidget {
 }
 
 class _myInfoState extends State<myInfo> {
+  bool likedbool = false;
+  bool isread = false;
+  bool doesPurchased = true;
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -71,22 +74,20 @@ class _myInfoState extends State<myInfo> {
           SizedBox(
             height: height / 30,
           ),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 40),
-              width: double.infinity,
-              child: Image.asset(
-                "asset/ganesha-reading-book-wallpaper-1.jpg",
-              ),
+          Container(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
+            width: double.infinity,
+            child: Image.asset(
+              "asset/ganesha-reading-book-wallpaper-1.jpg",
             ),
           ),
           Container(
-            // margin: const EdgeInsets.only(left: 5, right: 5),
             width: double.infinity,
             height: height / 5,
             decoration: BoxDecoration(
-              color: Colors.blue[200],
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.blue[200]
+                  : Colors.black,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
@@ -118,10 +119,20 @@ class _myInfoState extends State<myInfo> {
                       margin: EdgeInsets.only(right: width / 20),
                       height: height / 12,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            likedbool = !likedbool;
+                          });
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                              likedbool == false ? Colors.white : Colors.red),
+                          iconColor: MaterialStatePropertyAll(
+                              likedbool == false ? Colors.blue : Colors.white),
+                        ),
                         child: const Icon(
                           opticalSize: 30,
-                          Icons.bookmark_add_outlined,
+                          Icons.favorite,
                           size: 30,
                         ),
                       ),
@@ -137,6 +148,13 @@ class _myInfoState extends State<myInfo> {
                             ),
                           );
                         },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                            Theme.of(context).brightness == Brightness.light
+                                ? Colors.blue
+                                : const Color.fromARGB(255, 58, 58, 58),
+                          ),
+                        ),
                         child: const Text(
                           "Purchase",
                           style: TextStyle(fontSize: 30),
@@ -146,10 +164,26 @@ class _myInfoState extends State<myInfo> {
                     Container(
                       height: height / 12,
                       margin: EdgeInsets.only(left: width / 20),
-                      child: ElevatedButton(
-                          onPressed: () {}, child: const Icon(Icons.star_rate)
-                          // Color: Colors.black,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.blue
+                            : const Color.fromARGB(255, 58, 58, 58),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                      child: const Row(
+                        children: [
+                          Text(
+                            "3.4",
+                            style:
+                                TextStyle(color: Colors.yellow, fontSize: 20),
                           ),
+                          Icon(
+                            Icons.star_rate,
+                            color: Colors.yellow,
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -169,7 +203,13 @@ class _myInfoState extends State<myInfo> {
                   height: 50,
                   width: (width) / 3,
                   child: ElevatedButton(
-                    style: const ButtonStyle(),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(
+                        Theme.of(context).brightness == Brightness.light
+                            ? Colors.blue
+                            : const Color.fromARGB(255, 58, 58, 58),
+                      ),
+                    ),
                     onPressed: () {},
                     child: const Text("Download"),
                   ),
@@ -181,41 +221,63 @@ class _myInfoState extends State<myInfo> {
                   height: 50,
                   width: (width) / 3,
                   child: ElevatedButton(
-                    style: ButtonStyle(),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(
+                        Theme.of(context).brightness == Brightness.light
+                            ? Colors.blue
+                            : const Color.fromARGB(255, 58, 58, 58),
+                      ),
+                    ),
                     onPressed: () {},
                     child: const Text("App view"),
                   ),
                 ),
-                // IconButton(
-                //     onPressed: () {},
-                //     icon: const Text(
-                //       "Special",
-                //       style: TextStyle(color: Colors.white, fontSize: 10),
-                //     )
-                //     // Color: Colors.black,
-                //     ),
               ],
             ),
           ),
-          // Container(
-          //   width: double.infinity,
-          //   height: height,
-          //   child: const Center(
-          //     child: Column(
-          //       children: [],
-          //     ),
-          //   ),
-          // )
+          doesPurchased == true
+              ? Column(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      height: 50,
+                      width: width / 2,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            isread = !isread;
+                          });
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                            isread == false
+                                ? const Color.fromARGB(255, 210, 209, 209)
+                                : Colors.amber,
+                          ),
+                        ),
+                        child: isread == false
+                            ? const Text("Not Read")
+                            : const Text("Read"),
+                      ),
+                    ),
+                  ],
+                )
+              : const SizedBox(
+                  height: 1,
+                ),
           const SizedBox(
             height: 10,
           ),
-
           const SizedBox(
             height: 10,
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.blue
+                  : Colors.black,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Container(
@@ -223,7 +285,9 @@ class _myInfoState extends State<myInfo> {
               width: 300,
               margin: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.grey[200]
+                    : const Color.fromARGB(255, 91, 91, 91),
                 borderRadius: BorderRadius.circular(10),
               ),
               // child:
@@ -235,7 +299,9 @@ class _myInfoState extends State<myInfo> {
           Container(
             margin: const EdgeInsets.only(left: 10, right: 10),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.blue
+                  : Colors.black,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
@@ -273,40 +339,56 @@ class _myInfoState extends State<myInfo> {
                   margin: EdgeInsets.all(10),
                   height: height / 3,
                   decoration: BoxDecoration(
-                    color: Colors.grey[100],
+                    color: const Color.fromARGB(255, 232, 232, 232),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: ListView(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        child: TextField(
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
-                          minLines: 6,
-                          decoration: InputDecoration(
-                            hintText: 'Review',
-                            contentPadding: const EdgeInsets.all(15),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                  child: SingleChildScrollView(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            child: TextField(
+                              keyboardType: TextInputType.multiline,
+                              maxLines: 6,
+                              minLines: 6,
+                              style: const TextStyle(color: Colors.black),
+                              decoration: InputDecoration(
+                                hintText: 'Review',
+                                hintStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 224, 224, 224)),
+                                contentPadding: const EdgeInsets.all(15),
+                                hoverColor: Colors.black,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        height: 60,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "Submit Review",
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            height: 60,
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStatePropertyAll(
+                                  Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? Colors.blue
+                                      : const Color.fromARGB(255, 58, 58, 58),
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: const Text(
+                                "Submit Review",
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        ],
+                      ),
+                    ),
                   ),
-                  // child: request,
                 )
               ],
             ),
@@ -320,9 +402,6 @@ class _myInfoState extends State<myInfo> {
           const SizedBox(
             height: 10,
           ),
-          // ListView(
-          //   children: [],
-          // )
         ],
       ),
     );

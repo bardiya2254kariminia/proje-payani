@@ -85,11 +85,12 @@ class _logHomeState extends State<logHome> {
                       width: 300,
                       child: TextFormField(
                         ///////////////////////////////user
-
+                        style: TextStyle(color: Colors.blue[100]),
                         decoration: InputDecoration(
                           icon: const Icon(Icons.person),
                           // hintText: "username or email",
-                          labelText: "username",
+
+                          labelText: "Username or Email",
                           iconColor: Colors.blue[100],
                           hoverColor: Colors.blue[100],
                           suffixIconColor: Colors.blue[100],
@@ -120,6 +121,7 @@ class _logHomeState extends State<logHome> {
                       width: 300,
                       child: TextFormField(
                         obscureText: _obscured,
+                        style: TextStyle(color: Colors.blue[100]),
                         ///////////////////////////////password
                         decoration: InputDecoration(
                           icon: const Icon(Icons.lock),

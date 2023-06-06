@@ -2,6 +2,7 @@
 
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:main2/Book_Audio.dart/theme.dart';
 import 'package:main2/mainProj/infoPage.dart';
 import 'package:main2/maked_Widget/makedWidget.dart';
 
@@ -20,10 +21,9 @@ class _categorySearchPageState extends State<categorySearchPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightDarkTheme.getTheme(),
       home: Scaffold(
-        backgroundColor: Colors.blue[100],
         appBar: AppBar(
-          backgroundColor: Colors.blue,
           centerTitle: true,
           title: Text(
             widget.name,
@@ -78,19 +78,19 @@ class _myCategorySearchPageState extends State<myCategorySearchPage> {
             width: double.infinity,
             child: Scaffold(
               appBar: EasySearchBar(
-                backgroundColor: const Color.fromARGB(255, 16, 82, 137),
+                // backgroundColor: const Color.fromARGB(255, 16, 82, 137),
                 iconTheme: const IconThemeData(
                   color: Colors.white,
                 ),
-                searchClearIconTheme: const IconThemeData(
-                  color: Color.fromARGB(255, 16, 82, 137),
+                searchClearIconTheme: IconThemeData(
+                  color: Theme.of(context).iconTheme.color,
                 ),
-                searchTextStyle: const TextStyle(
-                  color: Color.fromARGB(255, 16, 82, 137),
+                searchTextStyle: TextStyle(
+                  color: Theme.of(context).iconTheme.color,
                 ),
-                searchCursorColor: const Color.fromARGB(255, 16, 82, 137),
-                searchBackIconTheme: const IconThemeData(
-                  color: Color.fromARGB(255, 16, 82, 137),
+                searchCursorColor: Theme.of(context).iconTheme.color,
+                searchBackIconTheme: IconThemeData(
+                  color: Theme.of(context).iconTheme.color,
                 ),
                 title: const Text(
                   "Search",
@@ -99,14 +99,14 @@ class _myCategorySearchPageState extends State<myCategorySearchPage> {
                 suggestions: examples,
                 suggestionsElevation: 10,
                 ////////////////////////////////////////////
-
+                suggestionBackgroundColor: Colors.grey,
                 suggestionBuilder: (value) => Card(
                   child: Container(
                     height: 40,
                     width: width,
                     padding: const EdgeInsets.only(left: 10),
                     decoration: BoxDecoration(
-                      color: Colors.grey[200],
+                      color: Colors.grey[50],
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(

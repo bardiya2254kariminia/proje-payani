@@ -109,7 +109,9 @@ class _signuppBody extends State<signuppBody> {
                         icon: const Icon(Icons.person),
                         // hintText: "username or email",
                         labelText: "username",
-                        labelStyle: TextStyle(color: Colors.blue[100]),
+                        labelStyle: TextStyle(
+                          color: Colors.blue[100],
+                        ),
                         iconColor: Colors.blue[100],
                         fillColor: Colors.blue[100],
                       ),
@@ -246,9 +248,7 @@ class _signuppBody extends State<signuppBody> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Home(
-                              // account: account,
-                              ),
+                          builder: (context) => const Home(),
                         ),
                       );
                     }

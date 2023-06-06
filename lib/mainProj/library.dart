@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:main2/Book_Audio.dart/theme.dart';
 import 'package:main2/mainProj/infoPage.dart';
 import 'package:main2/maked_Widget/makedWidget.dart';
 
@@ -16,13 +17,12 @@ class _LibraryState extends State<Library> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightDarkTheme.getTheme(),
       home: DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
           drawer: const myDrawer(),
-          backgroundColor: Colors.blue[50],
           appBar: AppBar(
-            backgroundColor: Colors.blue,
             centerTitle: true,
             title: const Text(
               "Library",
@@ -37,6 +37,9 @@ class _LibraryState extends State<Library> {
                 Tab(
                   icon: Text("Audiobooks"),
                 ),
+                Tab(
+                  icon: Text("Liked"),
+                ),
               ],
             ),
           ),
@@ -44,6 +47,7 @@ class _LibraryState extends State<Library> {
             children: [
               Ebook(),
               AudioBook(),
+              Ebook()
               // Text(";kefnvlef v")
             ],
           ),
@@ -167,6 +171,63 @@ class _AudioBookState extends State<AudioBook> {
   }
 }
 
+class Liked extends StatefulWidget {
+  const Liked({super.key});
+
+  @override
+  State<Liked> createState() => _LikedState();
+}
+
+class _LikedState extends State<Liked> {
+  @override
+  Widget build(BuildContext context) {
+    return const SingleChildScrollView(
+      child: Center(
+        child: Column(
+          children: [
+            myEbooks(),
+            SizedBox(
+              height: 5,
+            ),
+            myEbooks(),
+            SizedBox(
+              height: 5,
+            ),
+            myEbooks(),
+            SizedBox(
+              height: 5,
+            ),
+            myEbooks(),
+            SizedBox(
+              height: 5,
+            ),
+            myEbooks(),
+            SizedBox(
+              height: 5,
+            ),
+            myEbooks(),
+            SizedBox(
+              height: 5,
+            ),
+            myEbooks(),
+            SizedBox(
+              height: 5,
+            ),
+            myEbooks(),
+            SizedBox(
+              height: 5,
+            ),
+            myEbooks(),
+            SizedBox(
+              height: 5,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class myEbooks extends StatelessWidget {
   const myEbooks({super.key});
 
@@ -178,7 +239,9 @@ class myEbooks extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => infoPage(Name: "name",),
+            builder: (context) => const infoPage(
+              Name: "name",
+            ),
           ),
         );
       },
@@ -186,7 +249,7 @@ class myEbooks extends StatelessWidget {
         height: height / 7,
         width: width,
         decoration: BoxDecoration(
-          color: Colors.blue[200],
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(

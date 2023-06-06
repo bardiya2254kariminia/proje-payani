@@ -60,7 +60,7 @@ class _MyEditBodyState extends State<MyEditBody> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
     return Center(
       child: Container(
         margin: const EdgeInsets.all(5),
@@ -139,10 +139,10 @@ class _MyEditBodyState extends State<MyEditBody> {
                       validator: (value) {
                         // String userStr = username ?? "";
                         if (value == null ||
-                            value!.length < 8 ||
-                            !RegExp('[0-9]').hasMatch(value!) ||
-                            !RegExp('[a-z]').hasMatch(value!) ||
-                            !RegExp('[A-Z]').hasMatch(value!)) {
+                            value.length < 8 ||
+                            !RegExp('[0-9]').hasMatch(value) ||
+                            !RegExp('[a-z]').hasMatch(value) ||
+                            !RegExp('[A-Z]').hasMatch(value)) {
                           //halat ghalat
                           return "your password must have \n  one upper/lower letter\n number and \n mustbe more than 8 character";
                         } else {
