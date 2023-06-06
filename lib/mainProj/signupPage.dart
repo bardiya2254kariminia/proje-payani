@@ -54,11 +54,25 @@ class signuppBody extends StatefulWidget {
 
 class _signuppBody extends State<signuppBody> {
   final checker = GlobalKey<FormState>();
+  final textFieldFocusNode = FocusNode();
+  bool _obscured = true;
+
+  void _toggleObscured() {
+    setState(() {
+      _obscured = !_obscured;
+      if (textFieldFocusNode.hasPrimaryFocus)
+        return; // If focus is on text field, dont unfocus
+      textFieldFocusNode.canRequestFocus =
+          false; // Prevents focus if tap on eye
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     String? username;
     String? password;
     String? email;
+    bool passwordObscure = false;
 
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
@@ -125,11 +139,27 @@ class _signuppBody extends State<signuppBody> {
                     margin: const EdgeInsets.only(right: 20),
                     child: TextFormField(
                       cursorHeight: 23,
+                      obscureText: _obscured,
+
                       ///////////////////////////////password
-                      style: TextStyle(color: Colors.blue[100]),
+                      style: TextStyle(
+                        color: Colors.blue[100],
+                      ),
                       decoration: InputDecoration(
                         icon: const Icon(Icons.lock),
                         // hintText: "password",
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                          child: GestureDetector(
+                            onTap: _toggleObscured,
+                            child: Icon(
+                              _obscured
+                                  ? Icons.visibility_off_rounded
+                                  : Icons.visibility_rounded,
+                              size: 24,
+                            ),
+                          ),
+                        ),
                         labelText: "password",
                         labelStyle: TextStyle(color: Colors.blue[100]),
                         iconColor: Colors.blue[100],

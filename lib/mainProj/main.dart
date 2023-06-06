@@ -4,7 +4,7 @@ import 'signupPage.dart';
 void main() => runApp(log());
 
 class log extends StatefulWidget {
-  log({super.key});
+  const log({super.key});
 
   @override
   State<log> createState() => logState();
@@ -38,6 +38,19 @@ class _logHomeState extends State<logHome> {
   final checker = GlobalKey<FormState>();
   String? username = "";
   String? password = "";
+  final textFieldFocusNode = FocusNode();
+  bool _obscured = true;
+
+  void _toggleObscured() {
+    setState(() {
+      _obscured = !_obscured;
+      if (textFieldFocusNode.hasPrimaryFocus)
+        return; // If focus is on text field, dont unfocus
+      textFieldFocusNode.canRequestFocus =
+          false; // Prevents focus if tap on eye
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -106,6 +119,7 @@ class _logHomeState extends State<logHome> {
                     SizedBox(
                       width: 300,
                       child: TextFormField(
+                        obscureText: _obscured,
                         ///////////////////////////////password
                         decoration: InputDecoration(
                           icon: const Icon(Icons.lock),
@@ -115,6 +129,18 @@ class _logHomeState extends State<logHome> {
                           iconColor: Colors.blue[100],
                           hoverColor: Colors.blue[100],
                           suffixIconColor: Colors.blue[100],
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                            child: GestureDetector(
+                              onTap: _toggleObscured,
+                              child: Icon(
+                                _obscured
+                                    ? Icons.visibility_off_rounded
+                                    : Icons.visibility_rounded,
+                                size: 24,
+                              ),
+                            ),
+                          ),
                         ),
 
                         onChanged: (String? newValue) {
