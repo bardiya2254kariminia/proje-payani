@@ -22,3 +22,7 @@ public class Client {
         dos.close();
     }
 }
+
+
+//getAllTickets\n
+//username:abtin,email:---,password:---

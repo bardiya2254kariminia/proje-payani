@@ -1,0 +1,10 @@
+a5:bardiya,3,khob nist
+a2:bardiya,3,khob nist
+a1:bardiya,3,khob nist
+a3:bardiya,3,khob nist
+a4:bardiya,3,khob nist
+a1:bardiya,3,khob nist
+a2:bardiya,3,khob nist
+a3:bardiya,3,khob nist
+a3:salamian,3.0,salam
+null:kabab,3.0,salam
